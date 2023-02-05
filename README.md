@@ -10,12 +10,12 @@ To create the certificates we will be using open SSL which should be available o
 
 ### Create a private key for the new certificate authority:
 
-Generate with Password obviously one should choose a stronger password than 1234abcd
+1 Generate with password obviously one should choose a stronger password than 1234abcd
 ```
 openssl genrsa -des3 -out waterfrontCA.key -passout pass:"1234abcd" 2048
 ```
 
-Generate with user entering Password
+1 Or Generate with user entering password.
 ```
 openssl genrsa -des3 -out waterfrontCA.key  2048
 ```

@@ -9,14 +9,24 @@ To create the certificates we will be using open SSL which should be available o
   The fist step in create a Certificate is to have a Certificate Authority. The purpose of certificate authority cert  is to say that the certificate has already been vetted by a third party and should be trusted. We will need to create a certificate authority and install it's cert so the cert that we create will be trusted. 
 
 ### Create a private key for the new certificate authority:
+
+Generate with Password obviously one should choose a stronger password than 1234abcd
 ```
-openssl genrsa -des3 -out waterfrontCA.key 2048
+openssl genrsa -des3 -out waterfrontCA.key -passout pass:"1234abcd" 2048
 ```
+
+Generate with user entering Password
+```
+openssl genrsa -des3 -out waterfrontCA.key  2048
+```
+
+
+
 ### Next we will create the root certificate that will be good for 5 years
 
 Create a root certificate for the certificate authority
 ```
-openssl req -x509 -new -nodes -key WaterFrontCA.key -sha256 -days 1825 -out waterfrontCA.pem
+openssl req -x509 -new -nodes -key waterfrontCA.key -sha256 -days 1825 -out waterfrontCA.pem
 ```
 
 After running the above commands you should have the following:

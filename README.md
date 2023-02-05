@@ -1,4 +1,4 @@
-# Create-A-Wild-Card-Cert
+# Create A Wild Card Cert
 
 This a repository to go through the steps to create a test wild card cert for www.waterfrontsoftware.com
 

@@ -69,5 +69,38 @@ Insert-Cert
 
 
 
-Next we will need to install our site certifate. 
+## Step 2: Site Certificate
+
+Once the Certificate Authority Certificates have been created we can go and create our site certificates.
+
+```
+openssl genrsa -out www.waterfrontsoftare.com.key 2048
+```
+
+Create a certificate signing request other wise known as CSR
+
+```
+openssl req -new -key  www.waterfrontsoftare.com.key -out  www.waterfrontsoftare.com.csr
+```
+
+Creat the ext file required to sign the cert
+
+```
+cat <<EOT >>www.waterfrontsoftare.com.ext
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = www.waterfrontsoftare.com
+EOT
+```
+
+Create the site certificate using the CSR and config file:
+```
+openssl x509 -req -in www.waterfrontsoftware.com.csr -CA waterfrontCA.pem -CAkey waterfrontCA.key -CAcreateserial -out www.waterfrontsoftware.crt -days 1825 -sha256 -extfile www.waterfrontsoftare.com.ext
+```
+
+
 

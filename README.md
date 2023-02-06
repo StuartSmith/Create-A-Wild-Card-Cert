@@ -99,8 +99,13 @@ EOT
 
 Create the site certificate using the CSR and config file:
 ```
-openssl x509 -req -in www.waterfrontsoftware.com.csr -CA waterfrontCA.pem -CAkey waterfrontCA.key -CAcreateserial -out www.waterfrontsoftware.crt -days 1825 -sha256 -extfile www.waterfrontsoftare.com.ext
+openssl x509 -req -in www.waterfrontsoftware.com.csr -CA waterfrontCA.pem -CAkey waterfrontCA.key -CAcreateserial -out www.waterfrontsoftware.com.crt -days 1825 -sha256 -extfile www.waterfrontsoftware.com.ext
 ```
 
+If working with IIS we will need to change the site cert from crt to pfx below is the command line to do so. 
+```
+openssl pkcs12 -export -out www.waterfrontsoftware.com.pfx -inkey www.waterfrontsoftware.com.key -in www.waterfrontsoftware.com.crt
+
+```
 
 

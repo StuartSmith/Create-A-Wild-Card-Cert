@@ -71,7 +71,7 @@ Insert-Cert
 
 ## Step 2: Site Certificate
 
-Once the Certificate Authority Certificates have been created we can go and create our site certificates.
+Once the Certificate Authority Certificates have been created we can go ahead and create our site certificates. Create a private key for the site cert.
 
 ```
 openssl genrsa -out www.waterfrontsoftare.com.key 2048

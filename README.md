@@ -2,7 +2,7 @@
 
 This a repository to go through the steps to create a test wild card cert for www.waterfrontsoftware.com
 
-To create the certificates we will be using open SSL which should be available on most linux distrobutions. 
+To create the certificates we will be using open SSL which should be available on most linux distrobutions. Check your linux documentation if it is not present. 
 
 ## Step 1: Cert Authority.
  

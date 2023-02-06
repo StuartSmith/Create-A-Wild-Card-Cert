@@ -93,7 +93,7 @@ keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
 subjectAltName = @alt_names
 
 [alt_names]
-DNS.1 = www.waterfrontsoftare.com
+DNS.1 = *.waterfrontsoftare.com
 EOT
 ```
 

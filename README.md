@@ -28,14 +28,45 @@ Create a root certificate for the certificate authority
 openssl req -x509 -new -nodes -key waterfrontCA.key -sha256 -days 1825 -out waterfrontCA.pem
 ```
 
-### After running the above commands you should have the following:
-1. A private key for the certificate authority - saved in the file `waterfrontCA.key`
-1. A root certificate for the certificate authority - saved in the file `waterfrontCA.pem`
-
 The following step, we will create a PFX file to import into windows 
 ```
 openssl pkcs12 -export  -inkey waterfrontCA.key -in waterfrontCA.pem -out waterfrontCA.pfx
 ```
+
+### After running the above commands you should have the following:
+1. A private key for the certificate authority - saved in the file `waterfrontCA.key`
+1. A root certificate for the certificate authority - saved in the file `waterfrontCA.pem`
+1. A pfx file to import into windows for the root authority.
+
+
+```
+# To Run this script run the following in the powershell command Prompt ...
+# set-executionpolicy remotesigned 
+# or ...
+# powershell –ExecutionPolicy Bypass .\Insert-Cert.ps1
+
+Write-Host '#---------------------------------------------------------';
+Write-Host '#';
+Write-Host '#  Inserts a Cert into the local Store ';
+Write-Host '#';
+Write-Host '#';
+Write-Host '#---------------------------------------------------------';
+Write-Host '#';
+
+function Insert-Cert {
+    $CertPass = ConvertTo-SecureString "1234abcd" -AsPlainText -Force 
+
+    $localpath = (Get-Item -Path ".\" -Verbose).FullName;
+    $PFx =  "$($localpath)\waterfrontCA.pfx"
+
+    Write-host $PFx
+    Import-PfxCertificate -FilePath $PFx -Password $CertPass  -CertStoreLocation Cert:\LocalMachine\Root -Exportable
+}
+
+
+Insert-Cert
+```
+
 
 
 Next we will need to install our site certifate. 
